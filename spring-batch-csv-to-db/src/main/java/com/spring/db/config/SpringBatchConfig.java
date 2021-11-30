@@ -34,7 +34,6 @@ public class SpringBatchConfig {
         return jobBuilderFactory.get("ETL-Load")
                 .incrementer(new RunIdIncrementer())
                 .start(step())
-                .next(step1())
                 .build();
     }
     
@@ -49,17 +48,6 @@ public class SpringBatchConfig {
                 .build();
     }
     
-    @Bean
-    public Step step1()
-    {
-    	return stepBuilderFactory.get("ETL-file-load1")
-                .<Student, Student>chunk(100)
-                .reader(itemReader())
-                .processor(itemProcessor())
-                .writer(itemWriter())
-                .build();
-    }
-       
    @Bean
    public CsvItemReader itemReader()
    {
