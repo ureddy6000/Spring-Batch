@@ -1,9 +1,9 @@
 package com.spring.batch.config;
 
-import com.spring.batch.model.Person;
-import com.spring.batch.processor.PersonItemProcessor;
-import com.spring.batch.reader.DatabaseReader;
-import com.spring.batch.writer.CSVFileItemWriter;
+import javax.sql.DataSource;
+
+import com.spring.batch.reader.XMLFileReader;
+import com.spring.batch.writer.DataBaseWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -14,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
+import com.spring.batch.model.Person;
+import com.spring.batch.processor.PersonItemProcessor;
 
 @Configuration
 @EnableBatchProcessing
@@ -28,35 +29,41 @@ public class BatchConfig {
 	
 	@Autowired
 	private DataSource dataSource;
-
-	@Bean
-	public DatabaseReader dbReader()
-	{
-		return new DatabaseReader(dataSource);
-	}
-
+	
 	@Bean
 	public PersonItemProcessor processor(){
 		return new PersonItemProcessor();
 	}
 
 	@Bean
-	public CSVFileItemWriter csvWriter()
+	public XMLFileReader xmlReader()
 	{
-		return new CSVFileItemWriter();
+		return new XMLFileReader();
 	}
 
+	@Bean
+	public DataBaseWriter dbWriter()
+	{
+		return new DataBaseWriter(dataSource);
+	}
+
+	//configuring the step for the job and pass the method inside the job
 	@Bean
 	public Step step1(){
-		return stepBuilderFactory.get("step1").<Person,Person>chunk(100)
-				.reader(dbReader()).
-				processor(processor())
-				.writer(csvWriter())
-				.build();
+		return stepBuilderFactory.get("step1")
+				.<Person,Person>chunk(100).
+				reader(xmlReader())
+				.processor(processor())
+				.writer(dbWriter()).build();
 	}
 
+	//configuring the job to start which reads xml and writes it to the database
 	@Bean
-	public Job exportPersonJob(){
-		return jobBuilderFactory.get("exportPeronJob").incrementer(new RunIdIncrementer()).flow(step1()).end().build();
+	public Job exportPerosnJob(){
+		return jobBuilderFactory.get("importPersonJob")
+				.incrementer(new RunIdIncrementer())
+				.flow(step1())
+				.end().
+				build();
 	}
 }

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootBatchDbToCsvApplication {
+public class SpringBootBatchXmlToDbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootBatchDbToCsvApplication.class, args);
+		SpringApplication.run(SpringBootBatchXmlToDbApplication.class, args);
 	}
 }
