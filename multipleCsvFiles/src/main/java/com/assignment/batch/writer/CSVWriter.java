@@ -48,8 +48,8 @@ public class CSVWriter implements ItemWriter<StudentDetails>{
 		System.out.println(aboveFifty);
 		System.out.println(belowFifty);
 		
-		FlatFileItemWriter<Student> successWriter=new FlatFileItemWriter<Student>();
-		String file = "students_success" + "_" + Utils.createDateYYYYMMddHHMMSS() + ".csv";
+	FlatFileItemWriter<Student> successWriter=new FlatFileItemWriter<Student>();
+	String file = "students_success" + "_" + Utils.createDateYYYYMMddHHMMSS() + ".csv";
         successWriter.setResource(new FileSystemResource(file));
         successWriter.setAppendAllowed(true);
 
@@ -68,7 +68,7 @@ public class CSVWriter implements ItemWriter<StudentDetails>{
         successWriter.close();
         
         FlatFileItemWriter<Student> rejectWriter=new FlatFileItemWriter<Student>();
-		String rejectFile = "students_reject" + "_" + Utils.createDateYYYYMMddHHMMSS() + ".csv";
+	String rejectFile = "students_reject" + "_" + Utils.createDateYYYYMMddHHMMSS() + ".csv";
         rejectWriter.setResource(new FileSystemResource(rejectFile));
         rejectWriter.setAppendAllowed(true);
 
