@@ -18,7 +18,7 @@ public class UserService implements UserServiceInterface{
 	private UserRepo crudRepo;
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user) throws BusinessException {
 
 		if(user.getName().isEmpty() || user.getName().length() == 0 ) {
 			throw new BusinessException("601","Name cannot be empty");
@@ -36,7 +36,7 @@ public class UserService implements UserServiceInterface{
 	}
 
 	@Override
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() throws BusinessException {
 		List<User> userList = null;
 		try {
 			userList = crudRepo.findAll();
@@ -52,7 +52,7 @@ public class UserService implements UserServiceInterface{
 	
 
 	@Override
-	public User getUserById(Long userId)  {
+	public User getUserById(Long userId) throws BusinessException  {
 		try {
 			return crudRepo.findById(userId).get();
 			
@@ -68,7 +68,7 @@ public class UserService implements UserServiceInterface{
 	}
 
 	@Override
-	public void deleteUserById(Long userId) {
+	public void deleteUserById(Long userId) throws BusinessException,Exception {
 		try {
 			crudRepo.deleteById(userId);
 		}catch (IllegalArgumentException e) {

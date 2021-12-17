@@ -3,9 +3,13 @@ package com.rest.api.exception;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BusinessException extends RuntimeException{
+public class BusinessException extends Exception{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String errorCode;
 	private String errorMessage;
 	public String getErrorCode() {
