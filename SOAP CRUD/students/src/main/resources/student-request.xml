@@ -1,0 +1,46 @@
+<!--Create student-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:sch="http://api.soap.com/students/dto">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <sch:StudentDetailsRequest>
+            <sch:name>John</sch:name>
+            <sch:marks>350</sch:marks>
+        </sch:StudentDetailsRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+        <!--Get student by Id-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:sch="http://api.soap.com/students/dto">
+<soapenv:Header/>
+<soapenv:Body>
+    <sch:getStudentByIdRequest>
+        <sch:id>2</sch:id>
+    </sch:getStudentByIdRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+<!--Delete student by id-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:sch="http://api.soap.com/students/dto">
+<soapenv:Header/>
+<soapenv:Body>
+    <sch:deleteStudentByIdRequest>
+        <sch:id>1</sch:id>
+    </sch:deleteStudentByIdRequest>
+</soapenv:Body>
+</soapenv:Envelope>
+
+<!--Update student by id-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:sch="http://api.soap.com/students/dto">
+<soapenv:Header/>
+<soapenv:Body>
+    <sch:updateStudentByIdRequest>
+        <sch:id>1</sch:id>
+        <sch:name>Prem</sch:name>
+        <sch:marks>400</sch:marks>
+    </sch:updateStudentByIdRequest>
+</soapenv:Body>
+</soapenv:Envelope>
